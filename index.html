@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>HTML5 Tags — Dark Reference</title>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --card: #0f1720;
+        --muted: #94a3b8;
+        --accent: #3b82f6;
+        --accent-2: #06b6d4;
+        --glass: rgba(255, 255, 255, 0.03);
+        --success: #10b981;
+        --danger: #ef4444;
+        --mono: "Courier New", monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,body {
+        overflow: hidden !important
+      }
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", system-ui, -apple-system,
+          "Segoe UI Emoji", Arial;
+        background: linear-gradient(180deg, var(--bg), #071019 140%);
+        color: #e6eef6;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 260px;
+        min-width: 200px;
+        max-width: 320px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-right: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 18px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow: auto;
+        background-color: var(--bg);
+        scrollbar-width: none;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 4px 18px rgba(59, 130, 246, 0.12);
+        font-weight: 700;
+        color: #021227;
+      }
+      h1.brand-title {
+        font-size: 1rem;
+        margin: 0;
+        color: #dbeafe;
+      }
+      p.brand-sub {
+        margin: 4px 0 12px;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .search {
+        width: 50%;
+      }
+      .search input {
+        width: 100%;
+        flex: 1;
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 8px 10px;
+        border-radius: 8px;
+        color: #e6eef6;
+        outline: none;
+      }
+
+      nav.section-links {
+        display: block;
+      }
+      nav.section-links a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        color: var(--muted);
+        text-decoration: none;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+      }
+      nav.section-links a.active {
+        color: #021227;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        box-shadow: 0 6px 18px rgba(6, 182, 212, 0.08);
+        font-weight: 600;
+      }
+
+      /* Main content */
+      main {
+        margin: 20px auto;
+        width: 100%;
+      }
+      header.page {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background: var(--bg);
+        padding: 16px 28px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        z-index: 500;
+        gap: 0.3rem;
+      }
+
+      header.page h2 {
+        font-size: 1.35rem;
+        color: #e6eef6;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 7px 10px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: linear-gradie nt(90deg, var(--accent), var(--accent-2));
+        border: 0;
+        color: #021227;
+        font-weight: 600;
+      }
+
+      section.cat {
+        margin-bottom: 26px;
+        padding: 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          rgba(255, 255, 255, 0.02)
+        );
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      section.cat h3 {
+        text-align: center;
+        color: #cfe8ff;
+        font-size: 1.5rem;
+        position: sticky;
+        top: 7rem;
+        background: var(--bg);
+        padding: 12px 18px;
+        z-index: 100;
+      }
+
+      .tag-block {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid rgba(255, 255, 255, 0.02);
+      }
+      .tag-meta {
+        width: 100%;
+        height: 100%;
+      }
+      .tag-meta .tag-name {
+        font-family: var(--mono);
+        color: #a5f3fc;
+        font-weight: 700;
+      }
+      .tag-meta .tag-desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+
+      .tag-body {
+        flex: 1;
+      }
+      .tag-body p {
+        margin: 0 0 8px 0;
+        color: #e6eef6;
+      }
+      .example {
+        margin: 1.5rem auto;
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 10px 6rem 10px 12px;
+        border-radius: 8px;
+        font-family: var(--mono);
+        color: #dbeafe;
+        font-size: 0.92rem;
+        position: relative;
+      }
+      .copy-btn {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        background: transparent;
+        border: 0;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 0.85rem;
+      }
+
+      mark {
+        background: rgba(59, 130, 246, 0.18);
+        color: inherit;
+        padding: 0 0.15rem;
+        border-radius: 3px;
+      }
+      .no-results {
+        margin: 12px 0 0 0;
+        color: var(--muted);
+        text-align: center;
+        display: none;
+      }
+
+      footer.copy-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      #section-basic {
+        margin-top: 7rem;
+      }
+      /* Responsive */
+     
+        
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Navigation">
+      <div class="brand">
+        <div>
+          <h2 class="brand-title">HTML5 Tags</h2>
+        </div>
+      </div>
+
+      <nav class="section-links" id="navLinks" aria-label="Sections">
+        <!-- Links populated by JS -->
+      </nav>
+    </aside>
+
+    <main>
+      <header class="page">
+        <div>
+          <h1>HTML 5</h1>
+        </div>
+        <div class="search" role="search">
+          <input
+            id="searchInput"
+            placeholder="Search tags "
+            aria-label="Search tags"
+          />
+        </div>
+        <div class="controls">
+          <button class="btn" id="toggleNav">☰</button>
+        </div>
+      </header>
+
+      <div id="noResults" class="no-results" role="status" aria-live="polite">No matching tags</div>
+
+      <section class="cat" id="section-basic" data-section="Basic Structure">
+        <h3>Basic Structure Tags</h3>
+
+        <div class="tag-block" data-tags="doctype html5 declaration">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;!DOCTYPE html&gt;</div>
+            <div class="tag-desc">
+              Defines the document type and HTML version.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              It tells the browser that the document follows HTML5 standards.
+            </p>
+            <div class="example">
+              &lt;!DOCTYPE html&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="html root element document">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;html&gt;</div>
+            <div class="tag-desc">Root element of an HTML document.</div>
+          </div>
+          <div class="tag-body">
+            <p>
+              All other elements of the web page are nested inside the
+              &lt;html&gt; tag.
+            </p>
+            <div class="example">
+              &lt;html lang="en"&gt;<br />
+              &nbsp;&nbsp;&lt;head&gt;...&lt;/head&gt;<br />
+              &nbsp;&nbsp;&lt;body&gt;...&lt;/body&gt;<br />
+              &lt;/html&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="head metadata title links scripts">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;head&gt;</div>
+            <div class="tag-desc">
+              Container for metadata and document settings.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;head&gt; tag includes metadata, links to stylesheets,
+              scripts, and the page title.
+            </p>
+            <div class="example">
+              &lt;head&gt;<br />
+              &nbsp;&nbsp;&lt;title&gt;My Page&lt;/title&gt;<br />
+              &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br />
+              &nbsp;&nbsp;&lt;link rel="stylesheet" href="style.css"&gt;<br />
+              &lt;/head&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="title head page name browser tab">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;title&gt;</div>
+            <div class="tag-desc">
+              Specifies the title of the web page shown in the browser tab.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;title&gt; element helps identify the page and is important
+              for SEO and accessibility.
+            </p>
+            <div class="example">
+              &lt;head&gt;<br />
+              &nbsp;&nbsp;&lt;title&gt;My Portfolio&lt;/title&gt;<br />
+              &lt;/head&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="body visible content container">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;body&gt;</div>
+            <div class="tag-desc">Visible page content container.</div>
+          </div>
+          <div class="tag-body">
+            <p>
+              All the content that appears on the webpage is placed inside the
+              &lt;body&gt; tag, including text, images, links, and other
+              elements.
+            </p>
+            <div class="example">
+              &lt;body&gt;<br />
+              &nbsp;&nbsp;&lt;h1&gt;Hello, World!&lt;/h1&gt;<br />
+              &nbsp;&nbsp;&lt;p&gt;Welcome to my website.&lt;/p&gt;<br />
+              &lt;/body&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+
+      <section class="cat" id="section-meta" data-section="Metadata & Head">
+        <h3>📄 Metadata & Head Tags</h3>
+
+     
+        <div
+          class="tag-block"
+          data-tags="meta metadata charset description viewport seo"
+        >
+          <div class="tag-meta">
+            <div class="tag-name">&lt;meta&gt;</div>
+            <div class="tag-desc">
+              Provides metadata about the HTML document.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;meta&gt; tag gives information like character encoding,
+              author, description, and viewport settings for responsive design.
+            </p>
+            <div class="example">
+              &lt;meta charset="UTF-8"&gt;<br />
+              &lt;meta name="description" content="Free HTML tutorial"&gt;<br />
+              &lt;meta name="viewport" content="width=device-width,
+              initial-scale=1.0"&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tag-block"
+          data-tags="link stylesheet favicon external resource head"
+        >
+          <div class="tag-meta">
+            <div class="tag-name">&lt;link&gt;</div>
+            <div class="tag-desc">
+              Connects external resources like CSS or icons to the document.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;link&gt; tag is used inside the &lt;head&gt; to include
+              external stylesheets, icons, or other linked files.
+            </p>
+            <div class="example">
+              &lt;link rel="stylesheet" href="style.css"&gt;<br />
+              &lt;link rel="icon" href="favicon.png" type="image/png"&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="style css internal styling head">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;style&gt;</div>
+            <div class="tag-desc">
+              Defines internal CSS styles for the document.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;style&gt; tag is used within the &lt;head&gt; to include
+              CSS rules that style the HTML elements of the page.
+            </p>
+            <div class="example">
+              &lt;style&gt;<br />
+              &nbsp;&nbsp;body { background-color: #111; color: #fff; }<br />
+              &nbsp;&nbsp;h1 { text-align: center; }<br />
+              &lt;/style&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tag-block"
+          data-tags="script javascript code external internal"
+        >
+          <div class="tag-meta">
+            <div class="tag-name">&lt;script&gt;</div>
+            <div class="tag-desc">
+              Embeds or links JavaScript code in an HTML document.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;script&gt; tag is used to add interactivity or
+              functionality to a web page, either with inline code or an
+              external JS file.
+            </p>
+            <div class="example">
+              &lt;script&gt;<br />
+              &nbsp;&nbsp;console.log('Hello from JavaScript!');<br />
+              &lt;/script&gt;<br /><br />
+              &lt;script src="app.js"&gt;&lt;/script&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-block" data-tags="base url relative links head">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;base&gt;</div>
+            <div class="tag-desc">
+              Specifies the base URL for all relative links in a document.
+            </div>
+          </div>
+          <div class="tag-body">
+            <p>
+              The &lt;base&gt; tag sets a base path so that all relative URLs
+              (like images, links, or scripts) resolve from it. It must appear
+              inside the &lt;head&gt; and only once per page.
+            </p>
+            <div class="example">
+              &lt;base href="https://example.com/" target="_blank"&gt;<br />
+              &lt;a href="contact.html"&gt;Contact Us&lt;/a&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="cat"
+        id="section-struct"
+        data-section="Structural & Semantic"
+      >
+        <h3>🧱 Structural & Semantic HTML5 Tags</h3>
+
+       <div class="tag-block" data-tags="header semantic layout top-section logo nav">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;header&gt;</div>
+    <div class="tag-desc">Represents the top section or introductory content of a page or section.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;header&gt; element usually contains a logo, navigation menu, heading, or other introductory elements for a webpage or article.</p>
+    <div class="example">
+      &lt;header&gt;<br>
+      &nbsp;&nbsp;&lt;h1&gt;My Website&lt;/h1&gt;<br>
+      &nbsp;&nbsp;&lt;nav&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#"&gt;Home&lt;/a&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#"&gt;About&lt;/a&gt;<br>
+      &nbsp;&nbsp;&lt;/nav&gt;<br>
+      &lt;/header&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+      <div class="tag-block" data-tags="nav navigation links menu semantic layout">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;nav&gt;</div>
+    <div class="tag-desc">Defines a navigation section with links to other pages or sections.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;nav&gt; element is used to group major navigation links, such as menus, tables of contents, or site navigation bars.</p>
+    <div class="example">
+      &lt;nav&gt;<br>
+      &nbsp;&nbsp;&lt;a href="#home"&gt;Home&lt;/a&gt;<br>
+      &nbsp;&nbsp;&lt;a href="#about"&gt;About&lt;/a&gt;<br>
+      &nbsp;&nbsp;&lt;a href="#contact"&gt;Contact&lt;/a&gt;<br>
+      &lt;/nav&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+        <div class="tag-block" data-tags="main semantic layout primary content">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;main&gt;</div>
+    <div class="tag-desc">Represents the main or central content of a web page.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;main&gt; element contains the unique content of the page — the part that directly relates to the document’s primary purpose, excluding headers, footers, and sidebars.</p>
+    <div class="example">
+      &lt;main&gt;<br>
+      &nbsp;&nbsp;&lt;article&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Welcome&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;This is the main section of the page.&lt;/p&gt;<br>
+      &nbsp;&nbsp;&lt;/article&gt;<br>
+      &lt;/main&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+        <div class="tag-block" data-tags="section semantic layout grouping content">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;section&gt;</div>
+    <div class="tag-desc">Defines a standalone section of related content.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;section&gt; element groups content into thematic sections, such as chapters, topic blocks, or tab panels, each usually with a heading.</p>
+    <div class="example">
+      &lt;section&gt;<br>
+      &nbsp;&nbsp;&lt;h2&gt;About Us&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;We build modern web solutions using the MERN stack.&lt;/p&gt;<br>
+      &lt;/section&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+       <div class="tag-block" data-tags="article semantic independent content post blog news">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;article&gt;</div>
+    <div class="tag-desc">Represents an independent, self-contained piece of content.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;article&gt; element is used for standalone content such as blog posts, news articles, forum posts, or user comments that can be distributed independently.</p>
+    <div class="example">
+      &lt;article&gt;<br>
+      &nbsp;&nbsp;&lt;h2&gt;New Web Trends 2025&lt;/h2&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;Developers are focusing on AI-powered web apps and improved accessibility.&lt;/p&gt;<br>
+      &lt;/article&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+      <div class="tag-block" data-tags="aside sidebar related content semantic layout">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;aside&gt;</div>
+    <div class="tag-desc">Represents content indirectly related to the main content.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;aside&gt; element is often used for sidebars, pull quotes, ads, or related links that complement the main content but are not essential to it.</p>
+    <div class="example">
+      &lt;aside&gt;<br>
+      &nbsp;&nbsp;&lt;h3&gt;Related Articles&lt;/h3&gt;<br>
+      &nbsp;&nbsp;&lt;ul&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Learn React&lt;/a&gt;&lt;/li&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Intro to Node.js&lt;/a&gt;&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;/ul&gt;<br>
+      &lt;/aside&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="tag-block" data-tags="footer semantic layout bottom section credits">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;footer&gt;</div>
+    <div class="tag-desc">Defines the footer for a page or a section.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;footer&gt; element usually contains author information, copyright details, links, or contact info. It can be used for the entire page or individual sections.</p>
+    <div class="example">
+      &lt;footer&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;&copy; 2025 MyWebsite. All rights reserved.&lt;/p&gt;<br>
+      &nbsp;&nbsp;&lt;a href="#top"&gt;Back to top&lt;/a&gt;<br>
+      &lt;/footer&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="figure semantic media image illustration diagram">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;figure&gt;</div>
+    <div class="tag-desc">Represents self-contained content like images, illustrations, or code snippets.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;figure&gt; element is used to group visual media and their captions. It helps semantically associate content like images or diagrams with descriptions.</p>
+    <div class="example">
+      &lt;figure&gt;<br>
+      &nbsp;&nbsp;&lt;img src="mountain.jpg" alt="Mountain view"&gt;<br>
+      &nbsp;&nbsp;&lt;figcaption&gt;A scenic view of the mountains at sunset.&lt;/figcaption&gt;<br>
+      &lt;/figure&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="tag-block" data-tags="figcaption caption figure description semantic">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;figcaption&gt;</div>
+    <div class="tag-desc">Provides a caption or description for a &lt;figure&gt; element.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;figcaption&gt; tag describes the content of a &lt;figure&gt;, such as an image, chart, or diagram. It can appear before or after the content inside &lt;figure&gt;.</p>
+    <div class="example">
+      &lt;figure&gt;<br>
+      &nbsp;&nbsp;&lt;img src="sunrise.jpg" alt="Sunrise"&gt;<br>
+      &nbsp;&nbsp;&lt;figcaption&gt;Sunrise over the ocean.&lt;/figcaption&gt;<br>
+      &lt;/figure&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="details toggle hide show disclosure semantic">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;details&gt;</div>
+    <div class="tag-desc">Creates a collapsible content section that can be expanded or hidden by the user.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;details&gt; element is often used for FAQs, extra information, or expandable sections. It works natively without JavaScript.</p>
+    <div class="example">
+      &lt;details&gt;<br>
+      &nbsp;&nbsp;&lt;summary&gt;What is HTML?&lt;/summary&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;HTML stands for HyperText Markup Language.&lt;/p&gt;<br>
+      &lt;/details&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="summary details toggle heading semantic">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;summary&gt;</div>
+    <div class="tag-desc">Defines a visible heading for the &lt;details&gt; element.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;summary&gt; tag acts as the clickable title for a &lt;details&gt; section. When clicked, it expands or collapses the hidden content.</p>
+    <div class="example">
+      &lt;details&gt;<br>
+      &nbsp;&nbsp;&lt;summary&gt;Show more information&lt;/summary&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;Here is the hidden content revealed on click.&lt;/p&gt;<br>
+      &lt;/details&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="dialog modal popup interactive semantic">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;dialog&gt;</div>
+    <div class="tag-desc">Defines a dialog box or popup window.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;dialog&gt; tag creates a modal or popup box that can be opened or closed using JavaScript. It’s great for alerts, forms, or messages.</p>
+    <div class="example">
+      &lt;dialog id="myDialog"&gt;<br>
+      &nbsp;&nbsp;&lt;p&gt;This is a dialog box!&lt;/p&gt;<br>
+      &nbsp;&nbsp;&lt;button onclick="document.getElementById('myDialog').close()"&gt;Close&lt;/button&gt;<br>
+      &lt;/dialog&gt;<br><br>
+      &lt;button onclick="document.getElementById('myDialog').showModal()"&gt;Open Dialog&lt;/button&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="tag-block" data-tags="mark highlight text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;mark&gt;</div>
+    <div class="tag-desc">Highlights or marks text for reference or emphasis.</div>
+  </div>
+  <div class="tag-body">
+    <p>The <mark> tag is used to highlight text, often for search results or important notes.</p>
+    <div class="example">
+      &lt;p&gt;This is an &lt;mark&gt;important&lt;/mark&gt; word.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="tag-block" data-tags="time datetime element">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;time&gt;</div>
+    <div class="tag-desc">Represents a specific time or date.</div>
+  </div>
+  <div class="tag-body">
+    <p>The <time> tag is used to represent a specific time, date, or both — useful for events or articles.</p>
+    <div class="example">
+      &lt;p&gt;Published on &lt;time datetime="2025-11-02"&gt;November 2, 2025&lt;/time&gt;.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+      <section class="cat" id="section-text" data-section="Text Formatting">
+        <h3>✍️ Text Formatting Tags</h3>
+
+       <div class="tag-block" data-tags="headings h1 h6 titles">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;h1&gt; → &lt;h6&gt;</div>
+    <div class="tag-desc">Defines HTML headings from most to least important.</div>
+  </div>
+  <div class="tag-body">
+    <p>Heading tags structure page content by hierarchy. &lt;h1&gt; is the main title, while &lt;h6&gt; is the smallest heading.</p>
+    <div class="example">
+      &lt;h1&gt;Main Title&lt;/h1&gt;  
+      &lt;h2&gt;Subheading&lt;/h2&gt;  
+      &lt;h3&gt;Section Heading&lt;/h3&gt;  
+      &lt;h4&gt;Subsection&lt;/h4&gt;  
+      &lt;h5&gt;Smaller Heading&lt;/h5&gt;  
+      &lt;h6&gt;Least Important&lt;/h6&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<div class="tag-block" data-tags="p paragraph text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;p&gt;</div>
+    <div class="tag-desc">Defines a paragraph of text.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;p&gt; tag is used to group sentences and create readable paragraphs of text content.</p>
+    <div class="example">
+      &lt;p&gt;This is a simple paragraph explaining the use of the &lt;p&gt; tag.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+    
+
+<div class="tag-block" data-tags="br line break text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;br&gt;</div>
+    <div class="tag-desc">Inserts a single line break.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;br&gt; tag is used to start text on a new line without creating a new paragraph.</p>
+    <div class="example">
+      &lt;p&gt;Hello&lt;br&gt;World!&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="tag-block" data-tags="hr horizontal rule line separator">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;hr&gt;</div>
+    <div class="tag-desc">Represents a thematic break or horizontal line between content.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;hr&gt; tag visually separates sections of content, often used between topics or paragraphs.</p>
+    <div class="example">
+      &lt;p&gt;Introduction text&lt;/p&gt;  
+      &lt;hr&gt;  
+      &lt;p&gt;Next section starts here.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="b bold text emphasis">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;b&gt;</div>
+    <div class="tag-desc">Makes text bold without adding importance.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;b&gt; tag visually styles text in bold but doesn’t indicate emphasis or importance semantically.</p>
+    <div class="example">
+      &lt;p&gt;This is &lt;b&gt;bold&lt;/b&gt; text.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="strong importance bold text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;strong&gt;</div>
+    <div class="tag-desc">Indicates strong importance or emphasis.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;strong&gt; tag makes text bold and semantically signals that it’s important or urgent.</p>
+    <div class="example">
+      &lt;p&gt;Please &lt;strong&gt;read the instructions&lt;/strong&gt; carefully.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="i italic text style">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;i&gt;</div>
+    <div class="tag-desc">Displays text in an italic style without added emphasis.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;i&gt; tag is used for text that’s set off from normal prose, like technical terms or foreign words.</p>
+    <div class="example">
+      &lt;p&gt;This is &lt;i&gt;italic&lt;/i&gt; text.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="tag-block" data-tags="em emphasis italic text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;em&gt;</div>
+    <div class="tag-desc">Emphasizes text with semantic meaning (usually italicized).</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;em&gt; tag is used to stress or emphasize words — it also conveys importance to screen readers.</p>
+    <div class="example">
+      &lt;p&gt;You &lt;em&gt;must&lt;/em&gt; finish your work today.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="u underline text style">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;u&gt;</div>
+    <div class="tag-desc">Underlines text for stylistic purposes.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;u&gt; tag is used to underline text, though CSS is preferred for styling. It no longer implies a spelling error in HTML5.</p>
+    <div class="example">
+      &lt;p&gt;This is &lt;u&gt;underlined&lt;/u&gt; text.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tag-block" data-tags="small text size note">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;small&gt;</div>
+    <div class="tag-desc">Displays smaller-sized text, often for fine print or side notes.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;small&gt; tag is used to show less prominent text such as copyright or disclaimers.</p>
+    <div class="example">
+      &lt;p&gt;&copy; 2025 &lt;small&gt;All rights reserved.&lt;/small&gt;&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- sub -->
+<div class="tag-block" data-tags="sub subscript text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;sub&gt;</div>
+    <div class="tag-desc">Displays text as subscript below the baseline.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used in chemical formulas, math expressions, or footnotes.</p>
+    <div class="example">
+      &lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- sup -->
+<div class="tag-block" data-tags="sup superscript text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;sup&gt;</div>
+    <div class="tag-desc">Displays text as superscript above the baseline.</div>
+  </div>
+  <div class="tag-body">
+    <p>Commonly used for exponents or ordinal indicators.</p>
+    <div class="example">
+      &lt;p&gt;2&lt;sup&gt;3&lt;/sup&gt; = 8&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- blockquote -->
+<div class="tag-block" data-tags="blockquote quote citation">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;blockquote&gt;</div>
+    <div class="tag-desc">Defines a long quotation from another source.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used for multi-line quotes, often with a citation.</p>
+    <div class="example">
+      &lt;blockquote&gt;This is a long quoted paragraph.&lt;/blockquote&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- q -->
+<div class="tag-block" data-tags="q inline quote">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;q&gt;</div>
+    <div class="tag-desc">Defines a short inline quotation.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used for small quotes that appear inside a paragraph.</p>
+    <div class="example">
+      &lt;p&gt;He said, &lt;q&gt;Never give up!&lt;/q&gt;&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- abbr -->
+<div class="tag-block" data-tags="abbr abbreviation tooltip">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;abbr&gt;</div>
+    <div class="tag-desc">Defines an abbreviation or acronym with a tooltip.</div>
+  </div>
+  <div class="tag-body">
+    <p>Shows the full meaning when hovered.</p>
+    <div class="example">
+      &lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- cite -->
+<div class="tag-block" data-tags="cite citation reference">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;cite&gt;</div>
+    <div class="tag-desc">Cites the title of a creative work or reference.</div>
+  </div>
+  <div class="tag-body">
+    <p>Commonly used for books, movies, or research sources.</p>
+    <div class="example">
+      &lt;p&gt;&lt;cite&gt;The Great Gatsby&lt;/cite&gt; by F. Scott Fitzgerald&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- code -->
+<div class="tag-block" data-tags="code inline programming">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;code&gt;</div>
+    <div class="tag-desc">Displays inline code snippets.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used for short code or programming expressions within text.</p>
+    <div class="example">
+      &lt;p&gt;Use &lt;code&gt;console.log()&lt;/code&gt; to print output.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- pre -->
+<div class="tag-block" data-tags="pre preformatted text code">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;pre&gt;</div>
+    <div class="tag-desc">Displays preformatted text exactly as written in HTML.</div>
+  </div>
+  <div class="tag-body">
+    <p>Maintains spaces, tabs, and line breaks — often used for code blocks.</p>
+    <div class="example">
+      &lt;pre&gt;
+function greet() {
+  console.log("Hello");
+}
+&lt;/pre&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- kbd -->
+<div class="tag-block" data-tags="kbd keyboard input">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;kbd&gt;</div>
+    <div class="tag-desc">Represents keyboard input.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used to show what a user should type on the keyboard.</p>
+    <div class="example">
+      &lt;p&gt;Press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; to save.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- bdo -->
+<div class="tag-block" data-tags="bdo text direction">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;bdo&gt;</div>
+    <div class="tag-desc">Overrides the current text direction.</div>
+  </div>
+  <div class="tag-body">
+    <p>Useful for displaying right-to-left or left-to-right text manually.</p>
+    <div class="example">
+      &lt;bdo dir="rtl"&gt;This text is reversed.&lt;/bdo&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- span -->
+<div class="tag-block" data-tags="span inline container style">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;span&gt;</div>
+    <div class="tag-desc">Inline container for text styling or grouping.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used to apply CSS or JavaScript to specific parts of text.</p>
+    <div class="example">
+      &lt;p&gt;This is &lt;span style="color:red;"&gt;highlighted&lt;/span&gt; text.&lt;/p&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- div -->
+<div class="tag-block" data-tags="div container block layout">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;div&gt;</div>
+    <div class="tag-desc">Defines a block-level container for grouping elements.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;div&gt; tag is used to structure or style large sections of HTML content.</p>
+    <div class="example">
+      &lt;div class="box"&gt;Content inside a div&lt;/div&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+      </section>
+
+      <section class="cat" id="section-links" data-section="Links & Anchors">
+        <h3>🔗 Links & Anchors</h3>
+
+        <div class="tag-block" data-tags="a href target rel download">
+          <div class="tag-meta">
+            <div class="tag-name">&lt;a&gt;</div>
+            <div class="tag-desc">Hyperlinks and attributes</div>
+          </div>
+          <div class="tag-body">
+            <p>
+              Create links using &lt;a href="..."&gt; and use
+              target/rel/download attributes as needed.
+            </p>
+            <div class="example">
+              &lt;a href=\"https://example.com\" target=\"_blank\"
+              rel=\"noopener\"&gt;Open example&lt;/a&gt;
+              <button class="copy-btn" aria-label="Copy example">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cat" id="section-media" data-section="Image & Media">
+        <h3>🖼️ Image & Media Tags</h3>
+
+      <!-- img -->
+<div class="tag-block" data-tags="img image media">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;img&gt;</div>
+    <div class="tag-desc">Embeds an image into a webpage.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;img&gt; tag is used to display images. It requires the <code>src</code> attribute to specify the image path and <code>alt</code> for accessibility.</p>
+    <div class="example">
+      &lt;img src="photo.jpg" alt="Nature view" width="300"&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- audio -->
+<div class="tag-block" data-tags="audio sound media">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;audio&gt;</div>
+    <div class="tag-desc">Embeds sound content like music or narration.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;audio&gt; tag supports controls like play, pause, and volume.</p>
+    <div class="example">
+      &lt;audio controls&gt;
+        &lt;source src="sound.mp3" type="audio/mpeg"&gt;
+        Your browser does not support the audio element.
+      &lt;/audio&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- video -->
+<div class="tag-block" data-tags="video media player">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;video&gt;</div>
+    <div class="tag-desc">Embeds a video into a webpage.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;video&gt; tag supports multiple sources and playback controls.</p>
+    <div class="example">
+      &lt;video width="320" height="240" controls&gt;
+        &lt;source src="movie.mp4" type="video/mp4"&gt;
+        Your browser does not support the video tag.
+      &lt;/video&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- source -->
+<div class="tag-block" data-tags="source media audio video">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;source&gt;</div>
+    <div class="tag-desc">Specifies multiple media resources for audio or video elements.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;source&gt; tag lets browsers choose the best media format supported.</p>
+    <div class="example">
+      &lt;video controls&gt;
+        &lt;source src="movie.mp4" type="video/mp4"&gt;
+        &lt;source src="movie.webm" type="video/webm"&gt;
+      &lt;/video&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- track -->
+<div class="tag-block" data-tags="track captions subtitles media">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;track&gt;</div>
+    <div class="tag-desc">Provides text tracks for video or audio (subtitles, captions, etc.).</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;track&gt; tag is used to add subtitles or captions for media.</p>
+    <div class="example">
+      &lt;video controls&gt;
+        &lt;source src="movie.mp4" type="video/mp4"&gt;
+        &lt;track src="subtitles.vtt" kind="subtitles" srclang="en" label="English"&gt;
+      &lt;/video&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- canvas -->
+<div class="tag-block" data-tags="canvas graphics drawing js">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;canvas&gt;</div>
+    <div class="tag-desc">Used for drawing graphics via JavaScript.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;canvas&gt; element is used for rendering graphics, animations, and games using JavaScript APIs.</p>
+    <div class="example">
+      &lt;canvas id="myCanvas" width="200" height="100"&gt;&lt;/canvas&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- svg -->
+<div class="tag-block" data-tags="svg vector graphics">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;svg&gt;</div>
+    <div class="tag-desc">Defines scalable vector graphics directly in HTML.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;svg&gt; element is used for vector-based drawings that scale without losing quality.</p>
+    <div class="example">
+      &lt;svg width="100" height="100"&gt;
+        &lt;circle cx="50" cy="50" r="40" stroke="black" fill="lightblue"/&gt;
+      &lt;/svg&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- picture -->
+<div class="tag-block" data-tags="picture responsive images">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;picture&gt;</div>
+    <div class="tag-desc">Provides multiple image sources for responsive design.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;picture&gt; tag allows displaying different images based on device or screen size.</p>
+    <div class="example">
+      &lt;picture&gt;
+        &lt;source media="(min-width: 800px)" srcset="large.jpg"&gt;
+        &lt;source media="(min-width: 400px)" srcset="medium.jpg"&gt;
+        &lt;img src="small.jpg" alt="Responsive image"&gt;
+      &lt;/picture&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- map -->
+<div class="tag-block" data-tags="map image map areas">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;map&gt;</div>
+    <div class="tag-desc">Defines an image map with clickable areas.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;map&gt; tag works with &lt;area&gt; to create interactive image regions.</p>
+    <div class="example">
+      &lt;img src="planets.jpg" usemap="#planetmap" alt="Planets"&gt;<br>
+      &lt;map name="planetmap"&gt;
+        &lt;area shape="circle" coords="90,58,3" href="mercury.html" alt="Mercury"&gt;
+      &lt;/map&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- area -->
+<div class="tag-block" data-tags="area clickable image map">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;area&gt;</div>
+    <div class="tag-desc">Defines a clickable region in an image map.</div>
+  </div>
+  <div class="tag-body">
+    <p>Used within the &lt;map&gt; tag to create interactive zones linked to URLs or actions.</p>
+    <div class="example">
+      &lt;area shape="rect" coords="34,44,270,350" href="link.html" alt="Clickable area"&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+      <section class="cat" id="section-lists" data-section="Lists">
+        <h3>📋 Lists</h3>
+       
+
+<!-- ul -->
+<div class="tag-block" data-tags="ul unordered list">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;ul&gt;</div>
+    <div class="tag-desc">Defines an unordered (bulleted) list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;ul&gt; tag is used to create a list of items marked with bullets. Each item is defined using the &lt;li&gt; tag.</p>
+    <div class="example">
+      &lt;ul&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;HTML&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;CSS&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;JavaScript&lt;/li&gt;<br>
+      &lt;/ul&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ol -->
+<div class="tag-block" data-tags="ol ordered list">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;ol&gt;</div>
+    <div class="tag-desc">Defines an ordered (numbered) list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;ol&gt; tag creates a numbered list. You can change numbering style using the <code>type</code> attribute.</p>
+    <div class="example">
+      &lt;ol type="1"&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Learn HTML&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Learn CSS&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Learn JS&lt;/li&gt;<br>
+      &lt;/ol&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- li -->
+<div class="tag-block" data-tags="li list item">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;li&gt;</div>
+    <div class="tag-desc">Defines a list item inside &lt;ul&gt; or &lt;ol&gt;.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;li&gt; tag is used to represent individual items in a list.</p>
+    <div class="example">
+      &lt;ul&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Apple&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Banana&lt;/li&gt;<br>
+      &nbsp;&nbsp;&lt;li&gt;Cherry&lt;/li&gt;<br>
+      &lt;/ul&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- dl -->
+<div class="tag-block" data-tags="dl definition list">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;dl&gt;</div>
+    <div class="tag-desc">Defines a description list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;dl&gt; tag is used for a list of terms and their descriptions, paired using &lt;dt&gt; and &lt;dd&gt;.</p>
+    <div class="example">
+      &lt;dl&gt;<br>
+      &nbsp;&nbsp;&lt;dt&gt;HTML&lt;/dt&gt;<br>
+      &nbsp;&nbsp;&lt;dd&gt;Markup language for web pages.&lt;/dd&gt;<br>
+      &nbsp;&nbsp;&lt;dt&gt;CSS&lt;/dt&gt;<br>
+      &nbsp;&nbsp;&lt;dd&gt;Style language for designing web pages.&lt;/dd&gt;<br>
+      &lt;/dl&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- dt -->
+<div class="tag-block" data-tags="dt definition term">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;dt&gt;</div>
+    <div class="tag-desc">Defines a term in a description list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;dt&gt; element specifies the term or name being defined in a &lt;dl&gt; list.</p>
+    <div class="example">
+      &lt;dl&gt;<br>
+      &nbsp;&nbsp;&lt;dt&gt;JavaScript&lt;/dt&gt;<br>
+      &nbsp;&nbsp;&lt;dd&gt;Programming language for the web.&lt;/dd&gt;<br>
+      &lt;/dl&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- dd -->
+<div class="tag-block" data-tags="dd definition description">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;dd&gt;</div>
+    <div class="tag-desc">Defines the description or value of a term in a description list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;dd&gt; tag provides details or explanation for the preceding &lt;dt&gt; term.</p>
+    <div class="example">
+      &lt;dl&gt;<br>
+      &nbsp;&nbsp;&lt;dt&gt;CSS&lt;/dt&gt;<br>
+      &nbsp;&nbsp;&lt;dd&gt;Cascading Style Sheets, used for styling websites.&lt;/dd&gt;<br>
+      &lt;/dl&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+      </section>
+
+      <section class="cat" id="section-tables" data-section="Tables">
+        <h3>📊 Tables</h3>
+        <!-- table -->
+<div class="tag-block" data-tags="table tabular data">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;table&gt;</div>
+    <div class="tag-desc">Defines a table for organizing data in rows and columns.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;table&gt; tag is the container for all table-related elements like &lt;tr&gt;, &lt;th&gt;, and &lt;td&gt;.</p>
+    <div class="example">
+      &lt;table border="1"&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Name&lt;/th&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Age&lt;/th&gt;<br>
+      &nbsp;&nbsp;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Hitesh&lt;/td&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;21&lt;/td&gt;<br>
+      &nbsp;&nbsp;&lt;/tr&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- caption -->
+<div class="tag-block" data-tags="caption table title">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;caption&gt;</div>
+    <div class="tag-desc">Defines a title or caption for a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;caption&gt; tag provides a description for the table and appears above it by default.</p>
+    <div class="example">
+      &lt;table border="1"&gt;<br>
+      &nbsp;&nbsp;&lt;caption&gt;Student Data&lt;/caption&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;Raj&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;/tr&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- tr -->
+<div class="tag-block" data-tags="tr table row">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;tr&gt;</div>
+    <div class="tag-desc">Defines a row in a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;tr&gt; tag groups table cells (header or data) into rows.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;ID&lt;/th&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Name&lt;/th&gt;<br>
+      &nbsp;&nbsp;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;1&lt;/td&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Amit&lt;/td&gt;<br>
+      &nbsp;&nbsp;&lt;/tr&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- th -->
+<div class="tag-block" data-tags="th table header cell">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;th&gt;</div>
+    <div class="tag-desc">Defines a header cell in a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;th&gt; tag is used for header cells which are bold and centered by default.</p>
+    <div class="example">
+      &lt;tr&gt;<br>
+      &nbsp;&nbsp;&lt;th&gt;Name&lt;/th&gt;<br>
+      &nbsp;&nbsp;&lt;th&gt;Age&lt;/th&gt;<br>
+      &lt;/tr&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- td -->
+<div class="tag-block" data-tags="td table data cell">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;td&gt;</div>
+    <div class="tag-desc">Defines a data cell in a table row.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;td&gt; tag represents a single cell of table data.</p>
+    <div class="example">
+      &lt;tr&gt;<br>
+      &nbsp;&nbsp;&lt;td&gt;101&lt;/td&gt;<br>
+      &nbsp;&nbsp;&lt;td&gt;Rahul&lt;/td&gt;<br>
+      &lt;/tr&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- thead -->
+<div class="tag-block" data-tags="thead table head">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;thead&gt;</div>
+    <div class="tag-desc">Groups header content in a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;thead&gt; tag is used to group all header rows in a table, separating them from the body and footer.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;thead&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;/thead&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- tbody -->
+<div class="tag-block" data-tags="tbody table body">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;tbody&gt;</div>
+    <div class="tag-desc">Groups the main body content of a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;tbody&gt; tag wraps the main data rows of a table.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;tbody&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;101&lt;/td&gt;&lt;td&gt;Amit&lt;/td&gt;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;/tbody&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- tfoot -->
+<div class="tag-block" data-tags="tfoot table footer">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;tfoot&gt;</div>
+    <div class="tag-desc">Groups the footer content in a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;tfoot&gt; tag is used for summarizing or displaying footer data like totals.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;tfoot&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;300&lt;/td&gt;&lt;/tr&gt;<br>
+      &nbsp;&nbsp;&lt;/tfoot&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- col -->
+<div class="tag-block" data-tags="col table column">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;col&gt;</div>
+    <div class="tag-desc">Specifies column properties within a &lt;colgroup&gt;.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;col&gt; tag allows styling of entire columns in a table.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;colgroup&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;col span="1" style="background:#f0f0f0"&gt;<br>
+      &nbsp;&nbsp;&lt;/colgroup&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;Data&lt;/td&gt;&lt;/tr&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- colgroup -->
+<div class="tag-block" data-tags="colgroup table column group">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;colgroup&gt;</div>
+    <div class="tag-desc">Defines a group of one or more columns in a table.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;colgroup&gt; tag helps apply styles or attributes to entire column groups.</p>
+    <div class="example">
+      &lt;table&gt;<br>
+      &nbsp;&nbsp;&lt;colgroup&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;col style="background:#eee"&gt;<br>
+      &nbsp;&nbsp;&lt;/colgroup&gt;<br>
+      &nbsp;&nbsp;&lt;tr&gt;&lt;td&gt;Row 1&lt;/td&gt;&lt;/tr&gt;<br>
+      &lt;/table&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+      <section class="cat" id="section-forms" data-section="Forms & Inputs">
+        <h3>📥 Forms & Inputs</h3>
+
+     <!-- form -->
+<div class="tag-block" data-tags="form input user data submit">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;form&gt;</div>
+    <div class="tag-desc">Defines a form for collecting user input.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;form&gt; element is used to gather user input and send it to a server using methods like GET or POST.</p>
+    <div class="example">
+      &lt;form action="/submit" method="post"&gt;<br>
+      &nbsp;&nbsp;&lt;label&gt;Name:&lt;/label&gt;<br>
+      &nbsp;&nbsp;&lt;input type="text" name="name"&gt;<br>
+      &nbsp;&nbsp;&lt;button type="submit"&gt;Send&lt;/button&gt;<br>
+      &lt;/form&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- input -->
+<div class="tag-block" data-tags="input textbox checkbox radio form control">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;input&gt;</div>
+    <div class="tag-desc">Defines an input field where the user can enter data.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;input&gt; tag supports many types like text, email, number, password, checkbox, and radio.</p>
+    <div class="example">
+      &lt;input type="text" placeholder="Enter your name"&gt;<br>
+      &lt;input type="checkbox"&gt; I agree<br>
+      &lt;input type="radio" name="gender"&gt; Male
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- textarea -->
+<div class="tag-block" data-tags="textarea multiline input form">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;textarea&gt;</div>
+    <div class="tag-desc">Defines a multi-line text input field.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;textarea&gt; tag allows users to enter longer text content, such as comments or messages.</p>
+    <div class="example">
+      &lt;textarea rows="4" cols="40"&gt;Enter your message here...&lt;/textarea&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- button -->
+<div class="tag-block" data-tags="button form submit reset">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;button&gt;</div>
+    <div class="tag-desc">Defines a clickable button.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;button&gt; tag can be used to submit forms or run JavaScript actions.</p>
+    <div class="example">
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;<br>
+      &lt;button type="button"&gt;Click Me&lt;/button&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- label -->
+<div class="tag-block" data-tags="label form text">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;label&gt;</div>
+    <div class="tag-desc">Defines a label for an input element.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;label&gt; tag improves form accessibility by linking text to form controls.</p>
+    <div class="example">
+      &lt;label for="email"&gt;Email:&lt;/label&gt;<br>
+      &lt;input id="email" type="email" name="email"&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- select -->
+<div class="tag-block" data-tags="select dropdown menu">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;select&gt;</div>
+    <div class="tag-desc">Creates a drop-down list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;select&gt; tag lets users choose from a list of options, defined using &lt;option&gt;.</p>
+    <div class="example">
+      &lt;select&gt;<br>
+      &nbsp;&nbsp;&lt;option&gt;HTML&lt;/option&gt;<br>
+      &nbsp;&nbsp;&lt;option&gt;CSS&lt;/option&gt;<br>
+      &nbsp;&nbsp;&lt;option&gt;JavaScript&lt;/option&gt;<br>
+      &lt;/select&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- option -->
+<div class="tag-block" data-tags="option select dropdown item">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;option&gt;</div>
+    <div class="tag-desc">Defines an option in a &lt;select&gt; menu.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;option&gt; tag represents an item in a drop-down list.</p>
+    <div class="example">
+      &lt;select&gt;<br>
+      &nbsp;&nbsp;&lt;option value="1"&gt;Apple&lt;/option&gt;<br>
+      &nbsp;&nbsp;&lt;option value="2"&gt;Banana&lt;/option&gt;<br>
+      &lt;/select&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- optgroup -->
+<div class="tag-block" data-tags="optgroup select group">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;optgroup&gt;</div>
+    <div class="tag-desc">Groups related options in a &lt;select&gt; list.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;optgroup&gt; tag helps categorize related options for better usability.</p>
+    <div class="example">
+      &lt;select&gt;<br>
+      &nbsp;&nbsp;&lt;optgroup label="Fruits"&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Apple&lt;/option&gt;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Orange&lt;/option&gt;<br>
+      &nbsp;&nbsp;&lt;/optgroup&gt;<br>
+      &lt;/select&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- fieldset -->
+<div class="tag-block" data-tags="fieldset form group">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;fieldset&gt;</div>
+    <div class="tag-desc">Groups related form elements together.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;fieldset&gt; tag is used to visually and semantically group form controls.</p>
+    <div class="example">
+      &lt;fieldset&gt;<br>
+      &nbsp;&nbsp;&lt;legend&gt;User Info&lt;/legend&gt;<br>
+      &nbsp;&nbsp;&lt;input type="text" placeholder="Name"&gt;<br>
+      &nbsp;&nbsp;&lt;input type="email" placeholder="Email"&gt;<br>
+      &lt;/fieldset&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- legend -->
+<div class="tag-block" data-tags="legend form title">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;legend&gt;</div>
+    <div class="tag-desc">Defines a caption for a &lt;fieldset&gt;.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;legend&gt; tag provides a title for grouped form elements within a &lt;fieldset&gt;.</p>
+    <div class="example">
+      &lt;fieldset&gt;<br>
+      &nbsp;&nbsp;&lt;legend&gt;Login Form&lt;/legend&gt;<br>
+      &nbsp;&nbsp;&lt;input type="text" placeholder="Username"&gt;<br>
+      &lt;/fieldset&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- datalist -->
+<div class="tag-block" data-tags="datalist input autocomplete">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;datalist&gt;</div>
+    <div class="tag-desc">Provides predefined options for an &lt;input&gt; element.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;datalist&gt; tag offers a list of suggestions that appear as the user types in an &lt;input&gt;.</p>
+    <div class="example">
+      &lt;input list="browsers"&gt;<br>
+      &lt;datalist id="browsers"&gt;<br>
+      &nbsp;&nbsp;&lt;option value="Chrome"&gt;<br>
+      &nbsp;&nbsp;&lt;option value="Firefox"&gt;<br>
+      &nbsp;&nbsp;&lt;option value="Edge"&gt;<br>
+      &lt;/datalist&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- output -->
+<div class="tag-block" data-tags="output form result">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;output&gt;</div>
+    <div class="tag-desc">Displays the result of a calculation or user action.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;output&gt; tag is used to show dynamic calculation results from JavaScript or form input.</p>
+    <div class="example">
+      &lt;form oninput="result.value=parseInt(a.value)+parseInt(b.value)"&gt;<br>
+      &nbsp;&nbsp;&lt;input type="number" name="a"&gt;+&lt;input type="number" name="b"&gt;<br>
+      &nbsp;&nbsp;=&lt;output name="result"&gt;&lt;/output&gt;<br>
+      &lt;/form&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- progress -->
+<div class="tag-block" data-tags="progress loading bar status">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;progress&gt;</div>
+    <div class="tag-desc">Displays a progress bar for task completion.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;progress&gt; element visually represents the completion progress of a task.</p>
+    <div class="example">
+      &lt;progress value="70" max="100"&gt;70%&lt;/progress&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- meter -->
+<div class="tag-block" data-tags="meter measurement gauge value">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;meter&gt;</div>
+    <div class="tag-desc">Displays a scalar measurement within a known range.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;meter&gt; element represents a value within a specific range, like disk usage or score.</p>
+    <div class="example">
+      &lt;meter value="0.6"&gt;60%&lt;/meter&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+      <section class="cat" id="section-embed" data-section="Scripting & Embeds">
+        <h3>⚙️ Scripting Link</h3>
+
+    <!-- <script> -->
+<div class="tag-block" data-tags="script javascript code">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;script&gt;</div>
+    <div class="tag-desc">Embeds or references JavaScript code in HTML.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;script&gt; tag allows you to run or include JavaScript within a webpage.</p>
+    <div class="example">
+      &lt;script&gt;alert('Hello, World!');&lt;/script&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <noscript> -->
+<div class="tag-block" data-tags="noscript fallback content">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;noscript&gt;</div>
+    <div class="tag-desc">Provides alternative content if scripts are disabled.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;noscript&gt; tag shows fallback content when JavaScript is disabled in the browser.</p>
+    <div class="example">
+      &lt;noscript&gt;Please enable JavaScript for the best experience.&lt;/noscript&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <embed> -->
+<div class="tag-block" data-tags="embed media plugin object">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;embed&gt;</div>
+    <div class="tag-desc">Embeds external media like videos or PDFs into the page.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;embed&gt; tag is used to include external files (audio, video, PDF, etc.) in a webpage.</p>
+    <div class="example">
+      &lt;embed src="file.pdf" type="application/pdf" width="400" height="300"&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <object> -->
+<div class="tag-block" data-tags="object external resource">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;object&gt;</div>
+    <div class="tag-desc">Embeds external resources or applications, like PDFs or Flash.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;object&gt; tag can embed multimedia, other web pages, or plugins within your document.</p>
+    <div class="example">
+      &lt;object data="file.pdf" type="application/pdf" width="400" height="300"&gt;&lt;/object&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <param> -->
+<div class="tag-block" data-tags="param object parameter">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;param&gt;</div>
+    <div class="tag-desc">Defines parameters for plugins embedded with &lt;object&gt;.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;param&gt; tag specifies parameters for an &lt;object&gt; element, such as file source or settings.</p>
+    <div class="example">
+      &lt;object data="movie.swf"&gt;
+      &lt;param name="autoplay" value="true"&gt;
+      &lt;/object&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <iframe> -->
+<div class="tag-block" data-tags="iframe embedded webpage">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;iframe&gt;</div>
+    <div class="tag-desc">Embeds another HTML page within the current page.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;iframe&gt; tag allows you to display another web page inside your current document.</p>
+    <div class="example">
+      &lt;iframe src="https://example.com" width="400" height="300"&gt;&lt;/iframe&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+      <section
+        class="cat"
+        id="section-apis"
+        data-section="APIs & Modern Features"
+      >
+        <h3>⚡ HTML5 APIs & Features</h3>
+
+      <!-- <canvas> -->
+<div class="tag-block" data-tags="canvas graphics drawing js">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;canvas&gt;</div>
+    <div class="tag-desc">Provides a drawable region for dynamic graphics using JavaScript.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;canvas&gt; tag is used for rendering graphics, charts, and animations via JavaScript.</p>
+    <div class="example">
+      &lt;canvas id="myCanvas" width="200" height="100"&gt;&lt;/canvas&gt;
+      &lt;script&gt;
+        const c = document.getElementById('myCanvas');
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(20, 20, 100, 50);
+      &lt;/script&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <svg> -->
+<div class="tag-block" data-tags="svg vector graphics shapes">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;svg&gt;</div>
+    <div class="tag-desc">Defines vector-based graphics that scale without losing quality.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;svg&gt; tag is used to create shapes like circles, rectangles, and paths directly in HTML.</p>
+    <div class="example">
+      &lt;svg width="100" height="100"&gt;
+        &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /&gt;
+      &lt;/svg&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <audio> / <video> -->
+<div class="tag-block" data-tags="audio video media controls">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;audio&gt; / &lt;video&gt;</div>
+    <div class="tag-desc">Embeds sound or video content with playback controls.</div>
+  </div>
+  <div class="tag-body">
+    <p>Use &lt;audio&gt; for sound and &lt;video&gt; for visual media. Both can have controls, autoplay, and more.</p>
+    <div class="example">
+      &lt;audio controls&gt;
+        &lt;source src="sound.mp3" type="audio/mpeg"&gt;
+      &lt;/audio&gt;
+
+      &lt;video width="320" height="240" controls&gt;
+        &lt;source src="movie.mp4" type="video/mp4"&gt;
+      &lt;/video&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <track> -->
+<div class="tag-block" data-tags="track subtitles captions">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;track&gt;</div>
+    <div class="tag-desc">Specifies text tracks for &lt;video&gt; and &lt;audio&gt; (e.g., captions or subtitles).</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;track&gt; tag provides captions, subtitles, or metadata for media elements.</p>
+    <div class="example">
+      &lt;video controls&gt;
+        &lt;source src="movie.mp4" type="video/mp4"&gt;
+        &lt;track src="subs.vtt" kind="subtitles" srclang="en" label="English"&gt;
+      &lt;/video&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <template> -->
+<div class="tag-block" data-tags="template reusable html hidden">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;template&gt;</div>
+    <div class="tag-desc">Holds reusable HTML that’s hidden until activated by JavaScript.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;template&gt; tag stores content that is not rendered until used via JavaScript.</p>
+    <div class="example">
+      &lt;template id="card-template"&gt;
+        &lt;div class="card"&gt;Dynamic Card&lt;/div&gt;
+      &lt;/template&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <main> -->
+<div class="tag-block" data-tags="main content layout">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;main&gt;</div>
+    <div class="tag-desc">Represents the main content area of a page.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;main&gt; tag should contain the dominant content of the document, unique to the page.</p>
+    <div class="example">
+      &lt;main&gt;
+        &lt;h1&gt;Welcome&lt;/h1&gt;
+        &lt;p&gt;This is the main section of the page.&lt;/p&gt;
+      &lt;/main&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- <data> -->
+<div class="tag-block" data-tags="data value machine readable">
+  <div class="tag-meta">
+    <div class="tag-name">&lt;data&gt;</div>
+    <div class="tag-desc">Links machine-readable data to human-readable text.</div>
+  </div>
+  <div class="tag-body">
+    <p>The &lt;data&gt; tag associates a readable label with a machine-usable value (useful for datasets).</p>
+    <div class="example">
+      &lt;data value="404"&gt;Not Found&lt;/data&gt;
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+
+        <section
+        class="cat"
+        id="section-common-attributes"
+        data-section="Common Attributes"
+      >
+        <h3>Common Attributes</h3>
+
+<!-- Common HTML Attributes -->
+<div class="tag-block" data-tags="attributes global html">
+  <div class="tag-meta">
+    <div class="tag-name">Common HTML Attributes</div>
+    <div class="tag-desc">Widely used attributes to control behavior, styling, and identification of elements.</div>
+  </div>
+  <div class="tag-body">
+    <p>
+      These attributes are frequently used across most HTML tags to define properties, identify elements, and improve accessibility.
+    </p>
+
+    <div class="example">
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Description / Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td>Unique identifier for an element (used with CSS or JavaScript).</td>
+          </tr>
+          <tr>
+            <td><code>class</code></td>
+            <td>Assigns one or more class names for styling or JS targeting.</td>
+          </tr>
+          <tr>
+            <td><code>style</code></td>
+            <td>Adds inline CSS styles to an element.</td>
+          </tr>
+          <tr>
+            <td><code>title</code></td>
+            <td>Provides extra info on hover (tooltip text).</td>
+          </tr>
+          <tr>
+            <td><code>alt</code></td>
+            <td>Alternate text for images if they can’t load (for accessibility).</td>
+          </tr>
+          <tr>
+            <td><code>src</code></td>
+            <td>Specifies the file source (used in &lt;img&gt;, &lt;audio&gt;, &lt;video&gt;).</td>
+          </tr>
+          <tr>
+            <td><code>href</code></td>
+            <td>Defines the link URL (used in &lt;a&gt; and &lt;link&gt;).</td>
+          </tr>
+          <tr>
+            <td><code>target</code></td>
+            <td>Specifies where to open a linked document (e.g., <code>_blank</code> for new tab).</td>
+          </tr>
+          <tr>
+            <td><code>type</code></td>
+            <td>Defines input type or script type (e.g., <code>text</code>, <code>password</code>).</td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td>Specifies default value for form inputs or buttons.</td>
+          </tr>
+          <tr>
+            <td><code>placeholder</code></td>
+            <td>Displays hint text inside input fields.</td>
+          </tr>
+          <tr>
+            <td><code>required</code></td>
+            <td>Makes form input mandatory before submission.</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>Disables an element so users can’t interact with it.</td>
+          </tr>
+          <tr>
+            <td><code>readonly</code></td>
+            <td>Makes input non-editable but still visible and selectable.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+
+      </section>
+      <section class="cat" id="section-deprecated" data-section="Deprecated">
+        <h3>💡 Deprecated Tags (Avoid)</h3>
+
+        <!-- Deprecated HTML Tags -->
+<div class="tag-block" data-tags="deprecated html4 old-tags">
+  <div class="tag-meta">
+    <div class="tag-name">Deprecated Tags</div>
+    <div class="tag-desc">Old HTML elements removed or discouraged in HTML5.</div>
+  </div>
+  <div class="tag-body">
+    <p>
+      These tags were used in older versions of HTML. Modern web design uses CSS or newer semantic elements instead.
+    </p>
+
+    <div class="example">
+      <table>
+        <thead>
+          <tr>
+            <th>Old Tag</th>
+            <th>Modern Replacement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt;center&gt;</td>
+            <td>Use CSS: <code>text-align: center;</code></td>
+          </tr>
+          <tr>
+            <td>&lt;font&gt;</td>
+            <td>Use CSS: <code>font-family</code>, <code>font-size</code>, <code>color</code></td>
+          </tr>
+          <tr>
+            <td>&lt;big&gt; / &lt;small&gt;</td>
+            <td>Use CSS: <code>font-size</code></td>
+          </tr>
+          <tr>
+            <td>&lt;u&gt;</td>
+            <td>Use CSS: <code>text-decoration: underline;</code></td>
+          </tr>
+          <tr>
+            <td>&lt;marquee&gt;</td>
+            <td>Use CSS animations or JavaScript</td>
+          </tr>
+          <tr>
+            <td>&lt;bgsound&gt;</td>
+            <td>Use &lt;audio&gt;</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="copy-btn" aria-label="Copy example">Copy</button>
+    </div>
+  </div>
+</div>
+
+      </section>
+
+
+    </main>
+
+    <script>
+      // Build nav from sections
+      const nav = document.getElementById("navLinks");
+      const sections = Array.from(document.querySelectorAll("section.cat"));
+      sections.forEach((s) => {
+        const title =
+          s.dataset.section || s.querySelector("h3")?.innerText || "Section";
+        const a = document.createElement("a");
+        a.href = "#" + s.id;
+        a.textContent = title;
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          document
+            .querySelector("#" + s.id)
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        nav.appendChild(a);
+      });
+
+      const navLinks = Array.from(nav.querySelectorAll("a"));
+
+      // store original texts for highlighting
+      document.querySelectorAll('.tag-name, .tag-desc').forEach((el) => {
+        if (!el.dataset.original) el.dataset.original = el.innerText;
+      });
+
+      // escape HTML for safe insertion
+      function escapeHtml(s) {
+        return s
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // highlight occurrences of query q inside element (works on text)
+      function highlightElement(el, q) {
+        const orig = el.dataset.original || el.innerText || '';
+        if (!q) {
+          el.innerHTML = escapeHtml(orig);
+          return;
+        }
+        const lowQ = q.toLowerCase();
+        // if exact substring exists, wrap those occurrences
+        if (orig.toLowerCase().includes(lowQ)) {
+          const re = new RegExp(lowQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+          const escaped = escapeHtml(orig).replace(re, (m) => `<mark>${m}</mark>`);
+          el.innerHTML = escaped;
+          return;
+        }
+
+        // else try to highlight nearest word matches based on levenshtein
+        const parts = orig.split(/(\s+)/);
+        const threshold = q.length > 4 ? 2 : 1;
+        const out = parts
+          .map((part) => {
+            const clean = part.replace(/[^\w]/g, '');
+            if (!clean) return escapeHtml(part);
+            if (levenshtein(clean.toLowerCase(), lowQ) <= threshold) {
+              return `<mark>${escapeHtml(part)}</mark>`;
+            }
+            return escapeHtml(part);
+          })
+          .join('');
+        el.innerHTML = out;
+      }
+
+      function clearHighlights() {
+        document.querySelectorAll('.tag-name, .tag-desc').forEach((el) => {
+          el.innerHTML = escapeHtml(el.dataset.original || el.innerText || '');
+        });
+      }
+
+      function onScroll() {
+        const offset = window.scrollY + 120;
+        let current = sections[0];
+        for (let sec of sections) {
+          if (sec.offsetTop <= offset) current = sec;
+        }
+        navLinks.forEach((a) =>
+          a.classList.toggle(
+            "active",
+            a.getAttribute("href") === "#" + current.id
+          )
+        );
+      }
+      window.addEventListener("scroll", onScroll);
+      onScroll();
+
+      // Search filter (improved fuzzy matching)
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", filterTags);
+
+      // simple Levenshtein distance implementation
+      function levenshtein(a, b) {
+        if (a === b) return 0;
+        const al = a.length;
+        const bl = b.length;
+        if (al === 0) return bl;
+        if (bl === 0) return al;
+        const v0 = new Array(bl + 1);
+        const v1 = new Array(bl + 1);
+        for (let j = 0; j <= bl; j++) v0[j] = j;
+        for (let i = 0; i < al; i++) {
+          v1[0] = i + 1;
+          for (let j = 0; j < bl; j++) {
+            const cost = a[i] === b[j] ? 0 : 1;
+            v1[j + 1] = Math.min(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost);
+          }
+          for (let j = 0; j <= bl; j++) v0[j] = v1[j];
+        }
+        return v1[bl];
+      }
+
+      // return true when `q` fuzzily matches `text`
+      function fuzzyMatchText(text, q) {
+        if (!text) return false;
+        text = text.toLowerCase();
+        // direct includes is highest priority
+        if (text.includes(q)) return true;
+        // split into words and allow small edit distance per word
+        const parts = text.split(/\s+|[^a-z0-9]+/).filter(Boolean);
+        const threshold = q.length > 4 ? 2 : 1; // allow a bit more for longer queries
+        for (const p of parts) {
+          if (
+            Math.abs(p.length - q.length) <=
+            Math.max(1, Math.floor(q.length / 2))
+          ) {
+            const d = levenshtein(p, q);
+            if (d <= threshold) return true;
+          }
+        }
+        // last-resort: subsequence check (characters in order)
+        let i = 0;
+        for (const ch of q) {
+          i = text.indexOf(ch, i);
+          if (i === -1) return false;
+          i++;
+        }
+        return true;
+      }
+
+      function filterTags() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        const blocks = Array.from(document.querySelectorAll(".tag-block"));
+        const noResultsEl = document.getElementById('noResults');
+
+        if (!q) {
+          blocks.forEach((b) => {
+            b.style.display = "";
+          });
+          sections.forEach((s) => (s.style.display = ""));
+          // clear any highlights
+          clearHighlights();
+          if (noResultsEl) noResultsEl.style.display = 'none';
+          return;
+        }
+
+        let visibleSection = new Set();
+        blocks.forEach((b) => {
+          const nameEl = b.querySelector('.tag-name');
+          const descEl = b.querySelector('.tag-desc');
+          const tagName = (nameEl?.dataset.original || nameEl?.innerText || '').toLowerCase();
+          const tagDesc = (descEl?.dataset.original || descEl?.innerText || '').toLowerCase();
+          const datasetTags = (b.dataset.tags || '').toLowerCase();
+          const combined = datasetTags + ' ' + tagName + ' ' + tagDesc;
+
+          const ok =
+            fuzzyMatchText(combined, q) ||
+            fuzzyMatchText(tagName, q) ||
+            fuzzyMatchText(tagDesc, q) ||
+            fuzzyMatchText(datasetTags, q);
+
+          b.style.display = ok ? "" : "none";
+          if (ok) {
+            // highlight matches in name/desc
+            if (nameEl) highlightElement(nameEl, q);
+            if (descEl) highlightElement(descEl, q);
+            const sec = b.closest("section.cat");
+            if (sec && sec.id) visibleSection.add(sec.id);
+          } else {
+            // restore originals when not matching
+            if (nameEl) highlightElement(nameEl, '');
+            if (descEl) highlightElement(descEl, '');
+          }
+        });
+
+        // hide sections with no visible blocks
+        sections.forEach((s) => {
+          s.style.display = visibleSection.has(s.id) ? "" : "none";
+        });
+
+        // show no-results if nothing visible
+        const anyVisible = Array.from(document.querySelectorAll('.tag-block')).some(b => b.style.display !== 'none');
+        if (noResultsEl) noResultsEl.style.display = anyVisible ? 'none' : '';
+      }
+
+      // Copy buttons
+      document.addEventListener("click", (e) => {
+        if (e.target && e.target.classList.contains("copy-btn")) {
+          const ex = e.target.closest(".example");
+          if (!ex) return;
+          const code = ex.innerText.replace("Copy", "").trim();
+          navigator.clipboard
+            ?.writeText(code)
+            .then(() => {
+              e.target.textContent = "Copied";
+              setTimeout(() => (e.target.textContent = "Copy"), 1200);
+            })
+            .catch(() => {
+              e.target.textContent = "Copy";
+            });
+        }
+      });
+
+      // Toggle nav on narrow screens — set aria-expanded and toggle open class
+      const toggleNavBtn = document.getElementById("toggleNav");
+      if (toggleNavBtn) {
+        toggleNavBtn.setAttribute('aria-expanded', 'false');
+        toggleNavBtn.addEventListener("click", () => {
+          const sb = document.querySelector(".sidebar");
+          if (!sb) return;
+          const isOpen = sb.classList.toggle('open');
+          // mirror to aria-expanded
+          toggleNavBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          // fallback visual toggle for older styles
+          sb.style.display = isOpen ? 'block' : 'none';
+          if (isOpen) {
+            const inp = document.getElementById('searchInput');
+            if (inp) inp.focus();
+          }
+        });
+      }
+
+      // Download HTML (export current page as single file)
+      document.getElementById("downloadBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        const html = "<!doctype html>\\n" + document.documentElement.outerHTML;
+        const blob = new Blob([html], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "html5-tags-reference-dark.html";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      // Smooth scroll for clicks on internal anchors (also handled earlier)
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = a.getAttribute("href").slice(1);
+          const el = document.getElementById(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
